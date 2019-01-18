@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Exception;
 
 public class Ship {
 
 	public static enum ShipType {
 		MINESWEEPER(2),
 		BATTLESHIP(3),
-		DESTOYER(4),
+		DESTROYER(4),
 		INVALID(0);
 
 		private final int value;
@@ -35,7 +36,12 @@ public class Ship {
 	
 	public Ship(String kind) {
 		this.occupiedSquares = new ArrayList<Square>();
-		this.shipType = ShipType.valueOf(kind);
+		try {
+			this.shipType = ShipType.valueOf(kind);
+		} catch(Exception e) {
+			e.printStackTrace();
+			this.shipType = ShipType.INVALID;
+		}
 	}
 
 	public ShipType getShipType() {
