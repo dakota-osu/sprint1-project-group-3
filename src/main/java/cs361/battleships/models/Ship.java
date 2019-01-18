@@ -10,8 +10,8 @@ public class Ship {
 
 	public static enum ShipType {
 		MINESWEEPER(2),
-		BATTLESHIP(3),
-		DESTROYER(4),
+		BATTLESHIP(4),
+		DESTROYER(3),
 		INVALID(0);
 
 		private final int value;
@@ -48,7 +48,23 @@ public class Ship {
 		return this.shipType;
 	}
 
+	public void setOccupiedSquaresByOrientation(int row, char col, boolean verticle) {
+		this.occupiedSquares.clear();
+
+		for(int i = 0; i < this.shipType.getValue(); i++) {
+			Square s;
+			if(verticle) {
+				// rows increase going down the page
+				s = new Square(row + i, col);
+			} else {
+				// columns increase going to the right
+				s = new Square(row, (char)(col + i));
+			}
+			this.occupiedSquares.add(s);
+		}
+	}
+
 	public List<Square> getOccupiedSquares() {
-		return null;
+		return this.occupiedSquares;
 	}
 }
