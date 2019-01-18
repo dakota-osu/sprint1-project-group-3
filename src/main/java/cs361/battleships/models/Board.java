@@ -5,19 +5,44 @@ import java.util.List;
 
 public class Board {
 
+
+	private List<Ship> ships;
+
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Board() {
-		// TODO Implement
+		this.ships = new ArrayList<Ship>();
 	}
 
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-		// TODO Implement
-		return false;
+		Ship toAdd = new Ship(ship);
+		toAdd.setOccupiedSquaresByOrientation(x, y, isVertical);	
+
+		// check that each occupied square is valid
+		for(Square s : toAdd.getOccupiedSquares()) {
+			if(0 > s.getRow() || s.getRow() > 9)
+				return false;
+			if('A' > s.getColumn() || s.getColumn() > 'J')
+				return false;
+		}
+
+		// check that there are no shipwise collisions
+		// also check that the same board cannot have two of 
+		// the same piece
+		for(Ship incident : this.ships) {
+			if(toAdd.collidesWith(incident))
+				return false;
+			if(toAdd.getShipType().equals(incident.getShipType()))
+				return false;
+		}
+
+		this.ships.add(toAdd);
+
+		return true;
 	}
 
 	/*
@@ -29,12 +54,11 @@ public class Board {
 	}
 
 	public List<Ship> getShips() {
-		//TODO implement
-		return null;
+		return this.ships;
 	}
 
 	public void setShips(List<Ship> ships) {
-		//TODO implement
+		this.ships = ships;
 	}
 
 	public List<Result> getAttacks() {
