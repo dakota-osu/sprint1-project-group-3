@@ -5,12 +5,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Random;
+
 import static cs361.battleships.models.AtackStatus.*;
 
 public class Game {
 
     @JsonProperty private Board playersBoard = new Board();
     @JsonProperty private Board opponentsBoard = new Board();
+
+    private Random random = new Random();
 
     /*
 	DO NOT change the signature of this method. It is used by the grading scripts.
@@ -50,17 +54,14 @@ public class Game {
     }
 
     private char randCol() {
-        // TODO implement
-        return 'X';
+        return (char)(65 + random.nextInt(75));
     }
 
     private int randRow() {
-        // TODO implement
-        return 0;
+        return random.nextInt(10);
     }
 
     private boolean randVertical() {
-        // TODO implement
-        return false;
+        return random.nextBoolean();
     }
 }

@@ -44,6 +44,27 @@ public class Ship {
 		}
 	}
 
+	public Ship(Ship other) {
+		this.shipType = other.getShipType();
+		this.occupiedSquares = new ArrayList<Square>();
+		for(int i = 0; i < other.getOccupiedSquares().size(); i++) {
+			Square s = other.getOccupiedSquares().get(i);
+			s = new Square(s.getRow(), s.getColumn());
+			this.occupiedSquares.add(s);
+		}
+	}
+
+	public boolean collidesWith(Ship other) {
+		for(Square s1 : this.occupiedSquares) {
+			for(Square s2 : other.getOccupiedSquares()) {
+				if(s1.getRow() == s2.getRow() && s1.getColumn() == s2.getColumn()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public ShipType getShipType() {
 		return this.shipType;
 	}

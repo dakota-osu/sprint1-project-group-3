@@ -38,7 +38,6 @@ public class ShipTest {
         assertTrue(s1.getOccupiedSquares().get(2).getColumn() == 'C');
         assertTrue(s1.getOccupiedSquares().get(3).getColumn() == 'D');
 
-
         Ship s2 = new Ship("DESTROYER");
         s2.setOccupiedSquaresByOrientation(3, 'D', true);
         assertTrue(s2.getOccupiedSquares().size() == 3);
@@ -51,7 +50,35 @@ public class ShipTest {
         assertTrue(s3.getOccupiedSquares().size() == 2);
         assertTrue(s3.getOccupiedSquares().get(0).getColumn() == 'C');
         assertTrue(s3.getOccupiedSquares().get(1).getColumn() == 'D');
+    }
 
+    @Test
+    public void ShipsDetectCollsionsWithOtherShips() {
+        Ship s1 = new Ship("BATTLESHIP");
+        s1.setOccupiedSquaresByOrientation(4, 'D', false);
+        
+        Ship s2 = new Ship("MINESWEEPER");
+        s2.setOccupiedSquaresByOrientation(3, 'D', true);
+
+        Ship s3 = new Ship("DESTROYER");
+        s3.setOccupiedSquaresByOrientation(9, 'J', true);
+
+        assertTrue(s1.collidesWith(s2));
+        assertTrue(s2.collidesWith(s1));
+
+        assertFalse(s2.collidesWith(s3));
+    }
+
+    @Test
+    public void ShipCopyConstructorFunctionsCorrectly() {
+        Ship s1 = new Ship("BATTLESHIP");
+        s1.setOccupiedSquaresByOrientation(3, 'C', true);
+
+        Ship s2 = new Ship(s1);
+
+        assertEquals(s2.getShipType(), s1.getShipType());
+
+        
 
     }
 }
