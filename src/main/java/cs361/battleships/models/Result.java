@@ -15,7 +15,7 @@ public class Result {
 
 	public void setResult(AtackStatus result) {
 		//TODO implement
-		attackStatus = result;
+		this.attackStatus = result;
 	}
 
 	public Ship getShip() {

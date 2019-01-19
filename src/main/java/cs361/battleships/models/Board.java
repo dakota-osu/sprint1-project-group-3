@@ -49,8 +49,15 @@ public class Board {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Result attack(int x, char y) {
+
+		Result attackResult = new Result();
+		if(x < 1 || x >10 || y < 'A' || y > 'J'){
+			attackResult.setResult(AtackStatus.INVALID);
+		}
+
+
 		//TODO Implement
-		return null;
+		return attackResult;
 	}
 
 	public List<Ship> getShips() {
@@ -70,3 +77,4 @@ public class Board {
 		//TODO implement
 	}
 }
+
