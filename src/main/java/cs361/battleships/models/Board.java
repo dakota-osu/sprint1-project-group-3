@@ -24,7 +24,7 @@ public class Board {
 
 		// check that each occupied square is valid
 		for(Square s : toAdd.getOccupiedSquares()) {
-			if(0 > s.getRow() || s.getRow() > 9)
+			if(0 > s.getRow() || s.getRow() > 10)
 				return false;
 			if('A' > s.getColumn() || s.getColumn() > 'J')
 				return false;
