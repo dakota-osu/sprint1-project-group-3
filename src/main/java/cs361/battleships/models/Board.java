@@ -60,7 +60,7 @@ public class Board {
 
 		Result attackResult = new Result();
 		//check if valid
-		if(x < 1 || x >10 || y < 'A' || y > 'J'){			//if attack attempt is outside bounds of board, set status to invalid
+		if(x < 0 || x >10 || y < 'A' || y > 'J'){			//if attack attempt is outside bounds of board, set status to invalid
 			attackResult.setResult(AtackStatus.INVALID);
 		}
 
