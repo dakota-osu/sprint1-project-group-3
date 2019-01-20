@@ -41,4 +41,13 @@ public class BoardTest {
         assertEquals(samePlace2.getResult(), AtackStatus.INVALID);
 
     }
+
+    @Test
+    public void testHitAttack(){
+        Board board = new Board();
+        board.placeShip(new Ship ("BATTLESHIP"), 4, 'D', true);
+
+        Result r = board.attack(4, 'D'); //HIT
+        assertEquals(r.getResult(), AtackStatus.HIT);
+    }
 }

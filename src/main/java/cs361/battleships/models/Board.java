@@ -74,6 +74,19 @@ public class Board {
 			}
 		}
 
+        for (Ship s : ships){								//for each ship
+			for (Square sq : s.getOccupiedSquares()) {		//for each square occupied by the current ship
+				if(sq.getRow()==x || sq.getColumn()==y){
+					attackResult.setResult(AtackStatus.HIT);
+					break;
+				}
+			}
+			if(attackResult.getResult()==AtackStatus.HIT){
+				break;
+			}
+		}
+
+
 		this.attacks.add(attackResult);             // add to list of old attack attempts to compare against later
 		//TODO check if hit below
 
