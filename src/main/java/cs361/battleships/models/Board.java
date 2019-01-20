@@ -6,13 +6,15 @@ import java.util.List;
 public class Board {
 
 
-	private List<Ship> ships;
+	private List<Ship> ships;               //List of current boards ships
+	private List<Result> attackAttempts;   // List of all previous attack attempts
 
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Board() {
 		this.ships = new ArrayList<Ship>();
+		this.attackAttempts = new ArrayList<Result>();
 	}
 
 	/*
@@ -47,6 +49,12 @@ public class Board {
 
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
+	Function handles all attacking , so should
+	- See if attack location is valid
+	- if we've attacked there before
+	- if we hit anything there, and set result accordingly = HIT
+	- if that hit sunk the ship =  sunk
+	- if that hit sunk the last ship = Surrender
 	 */
 	public Result attack(int x, char y) {
 
@@ -69,6 +77,7 @@ public class Board {
 	}
 
 	public List<Result> getAttacks() {
+	    //should return all previous attack locations
 		//TODO implement
 		return null;
 	}
