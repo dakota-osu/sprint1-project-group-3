@@ -7,14 +7,14 @@ public class Board {
 
 
 	private List<Ship> ships;               //List of current boards ships
-	private List<Result> attackAttempts;   // List of all previous attack attempts
+	private List<Result> attacks;   // List of all previous attack attempts
 
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Board() {
 		this.ships = new ArrayList<Ship>();
-		this.attackAttempts = new ArrayList<Result>();
+		this.attacks = new ArrayList<Result>();
 	}
 
 	/*
@@ -66,7 +66,7 @@ public class Board {
 
         //TODO check if attacked before
 
-		this.attackAttempts.add(attackResult);             // add to list of old attack attempts to compare against later
+		this.attacks.add(attackResult);             // add to list of old attack attempts to compare against later
 		//TODO check if hit below
 		return attackResult;
 	}
@@ -82,11 +82,11 @@ public class Board {
 	public List<Result> getAttacks() {
 	    //should return all previous attacks
 		//TODO implement
-		return this.attackAttempts;
+		return this.attacks;
 	}
 
 	public void setAttacks(List<Result> attacks) {
-		//TODO implement
+		this.attacks = attacks;
 	}
 }
 
