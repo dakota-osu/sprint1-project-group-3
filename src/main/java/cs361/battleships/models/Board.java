@@ -59,15 +59,26 @@ public class Board {
 	public Result attack(int x, char y) {
 
 		Result attackResult = new Result();
+		attackResult.setLocation(new Square(x, y));		//
 		//check if valid
 		if(x < 0 || x >10 || y < 'A' || y > 'J'){			//if attack attempt is outside bounds of board, set status to invalid
 			attackResult.setResult(AtackStatus.INVALID);
+			return attackResult;
 		}
 
-        //TODO check if attacked before
+        for( Result r : attacks){
+        	Square s = r.getLocation();
+        	if(s.getRow()== x && s.getColumn() == y){
+        		attackResult.setResult(AtackStatus.INVALID);
+        		return attackResult;
+			}
+		}
 
 		this.attacks.add(attackResult);             // add to list of old attack attempts to compare against later
 		//TODO check if hit below
+
+
+
 		return attackResult;
 	}
 

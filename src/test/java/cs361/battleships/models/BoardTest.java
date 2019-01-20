@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+
 
 
 public class BoardTest {
@@ -25,5 +27,18 @@ public class BoardTest {
         assertTrue(board4.placeShip(new Ship("MINESWEEPER"), 9, 'A', false));
     }
 
+    @Test
+    public void testInvalidAttack(){
+        Board board = new Board();
+        board.placeShip(new Ship("MINESWEEPER"), 5, 'C', true);
 
+        Result r = board.attack(11, 'C');   //INVALID
+
+        assertEquals(r.getResult(), AtackStatus.INVALID);
+
+        Result samePlace1 = board.attack(4, 'D');
+        Result samePlace2 = board.attack(4,'D');
+        assertEquals(samePlace2.getResult(), AtackStatus.INVALID);
+
+    }
 }
