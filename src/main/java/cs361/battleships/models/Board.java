@@ -60,6 +60,7 @@ public class Board {
 
 		Result attackResult = new Result();
 		attackResult.setLocation(new Square(x, y));		//
+		attackResult.setResult(AtackStatus.MISS);				//should default to Miss if not changed by any others
 		//check if valid
 		if(x < 0 || x >10 || y < 'A' || y > 'J'){			//if attack attempt is outside bounds of board, set status to invalid
 			attackResult.setResult(AtackStatus.INVALID);
@@ -76,7 +77,7 @@ public class Board {
 
         for (Ship s : ships){								//for each ship
 			for (Square sq : s.getOccupiedSquares()) {		//for each square occupied by the current ship
-				if(sq.getRow()==x || sq.getColumn()==y){
+				if(sq.getRow()==x && sq.getColumn()==y){
 					attackResult.setResult(AtackStatus.HIT);
 					s.takeDamage(x,y);
 					if(s.getHealth()==0){

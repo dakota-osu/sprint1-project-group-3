@@ -66,7 +66,7 @@ public class BoardTest {
 
     }
 
-
+    @Test
     public void testSurrenderAttack(){
         Board board = new Board();
         board.placeShip(new Ship("MINESWEEPER"), 4, 'A', false);
@@ -79,5 +79,15 @@ public class BoardTest {
         Result r = board.attack(5, 'C');
 
         assertEquals(r.getResult(), AtackStatus.SURRENDER);
+    }
+
+    @Test
+    public void testMissAttack(){
+        Board board = new Board();
+        board.placeShip(new Ship("MINESWEEPER"), 4, 'A', false);
+
+        Result r = board.attack(1, 'A');
+
+        assertEquals(r.getResult(), AtackStatus.MISS);
     }
 }
