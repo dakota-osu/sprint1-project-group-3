@@ -40,6 +40,7 @@ public class Game {
     public boolean attack(int x, char  y) {
         Result playerAttack = opponentsBoard.attack(x, y);
         if (playerAttack.getResult() == INVALID) {
+            //ToDo Implementation
             return false;
         }
 
