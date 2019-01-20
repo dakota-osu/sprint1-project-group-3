@@ -78,12 +78,25 @@ public class Board {
 			for (Square sq : s.getOccupiedSquares()) {		//for each square occupied by the current ship
 				if(sq.getRow()==x || sq.getColumn()==y){
 					attackResult.setResult(AtackStatus.HIT);
+					s.takeDamage(x,y);
+					if(s.getHealth()==0){
+						attackResult.setResult(AtackStatus.SUNK);
+					}
 					break;
 				}
 			}
-			if(attackResult.getResult()==AtackStatus.HIT){
+			if(attackResult.getResult()==AtackStatus.HIT || attackResult.getResult()==AtackStatus.SUNK ){
 				break;
 			}
+		}
+
+
+        int totalHealth = 0;
+		for(Ship s : ships){
+			totalHealth+= s.getHealth();
+		}
+		if(totalHealth<=0){
+			attackResult.setResult(AtackStatus.SURRENDER);
 		}
 
 
