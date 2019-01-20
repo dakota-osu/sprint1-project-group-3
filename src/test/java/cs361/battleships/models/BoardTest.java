@@ -3,6 +3,8 @@ package cs361.battleships.models;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 
 public class BoardTest {
 
@@ -18,5 +20,8 @@ public class BoardTest {
         Board board3 = new Board();
         board3.placeShip(new Ship("BATTLESHIP"), 0, 'A', true);
         assertFalse(board3.placeShip(new Ship("BATTLESHIP"), 0, 'B', true));
+
+        Board board4 = new Board();
+        assertTrue(board4.placeShip(new Ship("MINESWEEPER"), 9, 'A', false));
     }
 }
