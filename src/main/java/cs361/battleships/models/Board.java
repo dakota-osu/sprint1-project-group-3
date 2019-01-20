@@ -51,7 +51,7 @@ public class Board {
 	public Result attack(int x, char y) {
 
 		Result attackResult = new Result();
-		if(x < 1 || x >10 || y < 'A' || y > 'J'){
+		if(x < 1 || x >10 || y < 'A' || y > 'J'){			//if attack attempt is outside bounds of board, set status to invalid
 			attackResult.setResult(AtackStatus.INVALID);
 		}
 
