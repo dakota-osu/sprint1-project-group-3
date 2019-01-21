@@ -1,3 +1,4 @@
+
 var isSetup = true;
 var placedShips = 0;
 var game;

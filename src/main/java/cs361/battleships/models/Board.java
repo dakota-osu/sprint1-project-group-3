@@ -6,13 +6,15 @@ import java.util.List;
 public class Board {
 
 
-	private List<Ship> ships;
+	private List<Ship> ships;               //List of current boards ships
+	private List<Result> attacks;   // List of all previous attack attempts
 
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public Board() {
 		this.ships = new ArrayList<Ship>();
+		this.attacks = new ArrayList<Result>();
 	}
 
 	/*
@@ -47,10 +49,64 @@ public class Board {
 
 	/*
 	DO NOT change the signature of this method. It is used by the grading scripts.
+	Function handles all attacking , so should
+	- See if attack location is valid
+	- if we've attacked there before
+	- if we hit anything there, and set result accordingly = HIT
+	- if that hit sunk the ship =  sunk
+	- if that hit sunk the last ship = Surrender
 	 */
 	public Result attack(int x, char y) {
-		//TODO Implement
-		return null;
+
+		Result attackResult = new Result();
+		attackResult.setLocation(new Square(x, y));		//
+		attackResult.setResult(AtackStatus.MISS);				//should default to Miss if not changed by any others
+		//check if valid
+		if(x < 0 || x >10 || y < 'A' || y > 'J'){			//if attack attempt is outside bounds of board, set status to invalid
+			attackResult.setResult(AtackStatus.INVALID);
+			return attackResult;
+		}
+
+        for( Result r : attacks){
+        	Square s = r.getLocation();
+        	if(s.getRow()== x && s.getColumn() == y){
+        		attackResult.setResult(AtackStatus.INVALID);
+        		return attackResult;
+			}
+		}
+
+        for (Ship s : ships){								//for each ship
+			for (Square sq : s.getOccupiedSquares()) {		//for each square occupied by the current ship
+				if(sq.getRow()==x && sq.getColumn()==y){
+					attackResult.setResult(AtackStatus.HIT);
+					s.takeDamage(x,y);
+					if(s.getHealth()==0){
+						attackResult.setResult(AtackStatus.SUNK);
+					}
+					break;
+				}
+			}
+			if(attackResult.getResult()==AtackStatus.HIT || attackResult.getResult()==AtackStatus.SUNK ){
+				break;
+			}
+		}
+
+
+        int totalHealth = 0;
+		for(Ship s : ships){
+			totalHealth+= s.getHealth();
+		}
+		if(totalHealth<=0){
+			attackResult.setResult(AtackStatus.SURRENDER);
+		}
+
+
+		this.attacks.add(attackResult);             // add to list of old attack attempts to compare against later
+		//TODO check if hit below
+
+
+
+		return attackResult;
 	}
 
 	public List<Ship> getShips() {
@@ -62,11 +118,13 @@ public class Board {
 	}
 
 	public List<Result> getAttacks() {
+	    //should return all previous attacks
 		//TODO implement
-		return null;
+		return this.attacks;
 	}
 
 	public void setAttacks(List<Result> attacks) {
-		//TODO implement
+		this.attacks = attacks;
 	}
 }
+

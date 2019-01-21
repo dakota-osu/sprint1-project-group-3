@@ -29,6 +29,7 @@ public class Ship {
 	private List<Square> occupiedSquares;
 
 	private ShipType shipType;
+	private int health;
 
 	public Ship() {
 		this("INVALID");
@@ -42,6 +43,7 @@ public class Ship {
 			e.printStackTrace();
 			this.shipType = ShipType.INVALID;
 		}
+		this.health = this.shipType.getValue();
 	}
 
 	public Ship(Ship other) {
@@ -52,6 +54,7 @@ public class Ship {
 			s = new Square(s.getRow(), s.getColumn());
 			this.occupiedSquares.add(s);
 		}
+		this.health = other.health;
 	}
 
 	public boolean collidesWith(Ship other) {
@@ -67,6 +70,12 @@ public class Ship {
 
 	public ShipType getShipType() {
 		return this.shipType;
+	}
+
+	public int getHealth(){ return this.health; }
+
+	public void takeDamage(int x, char y){
+		this.health-- ;
 	}
 
 	public void setOccupiedSquaresByOrientation(int row, char col, boolean verticle) {
