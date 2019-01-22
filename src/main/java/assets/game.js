@@ -24,8 +24,12 @@ function markHits(board, elementId, surrenderText) {
             className = "miss";
         else if (attack.result === "HIT")
             className = "hit";
-        else if (attack.result === "SUNK")
-            className = "hit"
+        else if (attack.result === "SUNK") {
+            className = "sink";
+            attack.ship.occupiedSquares.forEach((square) => {
+                document.getElementById(elementId).rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
+            });
+        }
         else if (attack.result === "SURRENDER") {
             alert(surrenderText);
             location.reload();

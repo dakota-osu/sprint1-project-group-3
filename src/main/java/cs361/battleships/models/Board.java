@@ -82,6 +82,7 @@ public class Board {
 					s.takeDamage(x,y);
 					if(s.getHealth()==0){
 						attackResult.setResult(AtackStatus.SUNK);
+						attackResult.setShip(new Ship(s));
 					}
 					break;
 				}
