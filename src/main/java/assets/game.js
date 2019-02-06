@@ -2,7 +2,7 @@
 var isSetup = true;
 var placedShips = 0;
 var game;
-var shipType;
+var shipType = [];
 var vertical;
 
 function makeGrid(table, isPlayer) {
@@ -73,7 +73,8 @@ function cellClick() {
     let row = this.parentNode.rowIndex + 1;
     let col = String.fromCharCode(this.cellIndex + 65);
     if (isSetup) {
-        sendXhr("POST", "/place", {game: game, shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
+        sendXhr("POST", "/place", {game: game, shipType: shipType[0], x: row, y: col, isVertical: vertical}, function(data) {
+            shipType.shift();
             game = data;
             redrawGrid();
             placedShips++;
@@ -134,18 +135,8 @@ function place(size) {
 function initGame() {
     makeGrid(document.getElementById("opponent"), false);
     makeGrid(document.getElementById("player"), true);
-    document.getElementById("place_minesweeper").addEventListener("click", function(e) {
-        shipType = "MINESWEEPER";
-       registerCellListener(place(2));
-    });
-    document.getElementById("place_destroyer").addEventListener("click", function(e) {
-        shipType = "DESTROYER";
-       registerCellListener(place(3));
-    });
-    document.getElementById("place_battleship").addEventListener("click", function(e) {
-        shipType = "BATTLESHIP";
-       registerCellListener(place(4));
-    });
+
+    shipType = ["BATTLESHIP", "DESTROYER", "MINESWEEPER"];
     sendXhr("GET", "/game", {}, function(data) {
         game = data;
     });
