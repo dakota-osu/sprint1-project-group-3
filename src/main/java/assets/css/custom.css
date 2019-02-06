@@ -39,3 +39,18 @@ td:hover {
 .miss {
     background-color: blue;
 }
+
+#game-modal {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+
+    display: flex;
+
+    background-color: blue;
+    border-radius: 50px;
+
+    height: 520px;
+
+
+}
