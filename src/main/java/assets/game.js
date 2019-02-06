@@ -5,6 +5,18 @@ var game;
 var shipType;
 var vertical;
 
+document.getElementById("errorButton").addEventListener("click", showError);
+document.getElementById("error-ok").addEventListener("click", closeError);
+
+function showError(errorText) {
+    document.getElementById("errorText").innerHTML = errorText;
+    document.getElementById("error").style.visibility = "visible";
+}
+
+function closeError() {
+    document.getElementById("error").style.visibility = "hidden";
+}
+
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
         let row = document.createElement('tr');
@@ -90,7 +102,7 @@ function sendXhr(method, url, data, handler) {
     var req = new XMLHttpRequest();
     req.addEventListener("load", function(event) {
         if (req.status != 200) {
-            alert("Cannot complete the action");
+            showError("Cannot complete that action");
             return;
         }
         handler(JSON.parse(req.responseText));

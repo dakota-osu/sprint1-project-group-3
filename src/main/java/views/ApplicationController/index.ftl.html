@@ -10,17 +10,21 @@
 <table id="player" class="battleGrid">
 </table>
 
-<div id="myModal" class="error-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="error-modal-header">
-        <h3 id="myModalLabel">ERROR</h3>
-    </div>
-    <div class="error-modal-body">
-        <p>You shouldn't be seeing this right now....</p>
-    </div>
-    <div class="error-modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">OK</button>
+<div id="error" class="error-modal-container">
+    <div id="myModal" class="error-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="error-modal-header">
+            <h3 id="myModalLabel">ERROR</h3>
+        </div>
+        <div class="error-modal-body">
+            <p id="errorText">You shouldn't be seeing this right now....</p>
+        </div>
+        <div class="error-modal-footer">
+            <button id="error-ok" class="error-ok" data-dismiss="modal" aria-hidden="true">OK</button>
+        </div>
     </div>
 </div>
+
+<button id="errorButton" class="error-maker">MAKE AN ERROR</button>
 
 <ul>
     <li><button id="place_minesweeper">Place Minesweeper</button></li>
