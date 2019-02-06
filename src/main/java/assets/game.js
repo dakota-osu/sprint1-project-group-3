@@ -1,8 +1,8 @@
 
-var isSetup = true;
+var isSetup = false;
 var placedShips = 0;
 var game;
-var shipType;
+var shipType = "BADSHIP";
 var vertical;
 
 document.getElementById("errorButton").addEventListener("click", showError);
@@ -85,16 +85,27 @@ function cellClick() {
             game = data;
             redrawGrid();
             placedShips++;
+            isSetup = false;
+            shipType = "BADSHIP";
             if (placedShips == 3) {
                 isSetup = false;
                 registerCellListener((e) => {});
             }
         });
     } else {
-        sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
-            game = data;
-            redrawGrid();
-        })
+        if (placedShips != 3) {
+            if (shipType == "BADSHIP") {
+                showError("No ship selected");
+            } else {
+                showError("Already placed that ship");
+            }
+        }
+        if (placedShips == 3) {
+            sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
+                game = data;
+                redrawGrid();
+            })
+        }
     }
 }
 
@@ -102,7 +113,7 @@ function sendXhr(method, url, data, handler) {
     var req = new XMLHttpRequest();
     req.addEventListener("load", function(event) {
         if (req.status != 200) {
-            showError("Cannot complete that action");
+            showError("Cannot target that spot");
             return;
         }
         handler(JSON.parse(req.responseText));
@@ -144,14 +155,17 @@ function initGame() {
     makeGrid(document.getElementById("player"), true);
     document.getElementById("place_minesweeper").addEventListener("click", function(e) {
         shipType = "MINESWEEPER";
+        isSetup = true;
        registerCellListener(place(2));
     });
     document.getElementById("place_destroyer").addEventListener("click", function(e) {
         shipType = "DESTROYER";
+        isSetup = true;
        registerCellListener(place(3));
     });
     document.getElementById("place_battleship").addEventListener("click", function(e) {
         shipType = "BATTLESHIP";
+        isSetup = true;
        registerCellListener(place(4));
     });
     sendXhr("GET", "/game", {}, function(data) {
