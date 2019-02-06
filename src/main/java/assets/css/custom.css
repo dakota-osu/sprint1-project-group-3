@@ -2,12 +2,10 @@
 -------------------------------------------------- */
 
 .battleGrid {
-    border: 1px solid black;
     border-spacing: 0px;
 }
 
 .battleGrid tr {
-    border: 1px solid black;
     height: 30px;
 }
 
@@ -29,15 +27,28 @@ td:hover {
 }
 
 .hit {
-    background-color: orange;
+    background-color: #FFDE03;
 }
 
 .sink {
-    background-color: red;
+
+    background-color: #FF0266;
 }
 
 .miss {
-    background-color: blue;
+    background-color: #0336FF;
+}
+
+.hidden {
+    display: none;
+}
+
+.primary-color {
+    background-color: white;
+}
+
+.secondary-color{
+    background-color: black;
 }
 
 #game-modal {
@@ -53,4 +64,26 @@ td:hover {
     height: 520px;
 
 
+}
+
+.board-container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}
+
+.board-container p {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 5px
+}
+
+
+.board {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+    background-color: white;
 }
