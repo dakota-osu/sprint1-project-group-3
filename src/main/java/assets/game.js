@@ -26,11 +26,11 @@ function markHits(board, elementId, surrenderText) {
             className = "hit";
         else if (attack.result === "SUNK") {
             className = "sink";
-            attack.ship.occupiedSquares.forEach((square) => {
-                document.getElementById(elementId).rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
+            attack.ship.occupiedSquares.forEach((square) => {                                                                                           //if ship sunk, grab all occupied squares of ship
+                document.getElementById(elementId).rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);  //set all ship elements to sink class name
             });
         }
-        else if (attack.result === "SURRENDER") {
+        else if (attack.result === "SURRENDER") {                                   //if you win, display surrender text, then reload the game
             alert(surrenderText);
             location.reload();
         }
