@@ -39,3 +39,16 @@ td:hover {
 .miss {
     background-color: blue;
 }
+
+.error-modal {
+    display: block;
+    border: 1px solid black;
+}
+
+.error-modal-header {
+    text-align: center;
+}
+
+.error-modal-body {
+    text-align: center;
+}
