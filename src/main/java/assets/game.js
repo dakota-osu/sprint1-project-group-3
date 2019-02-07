@@ -39,14 +39,17 @@ function makeGrid(table, isPlayer) {
 function markHits(board, elementId, surrenderText) {
     board.attacks.forEach((attack) => {
         let className;
-        if (attack.result === "MISS")
+        if (attack.result === "MISS"){
             className = "miss";
-        else if (attack.result === "HIT")
-            className = "hit";
+         }
+        else if (attack.result === "HIT"){
+                className = "hit";
+        }
+
         else if (attack.result === "SUNK") {
             console.log(attack.ship.shipType);
 
-           document.getElementById(elementId + "-" + attack.ship.shipType.toLowerCase()).classList.add("crossed-out");
+           document.getElementById(elementId + "-" + attack.ship.shipType.toLowerCase()).classList.add("crossed-out");                                  //if sunken, cross out ship name
 
             className = "sink";
             attack.ship.occupiedSquares.forEach((square) => {                                                                                           //if ship sunk, grab all occupied squares of ship
@@ -58,7 +61,12 @@ function markHits(board, elementId, surrenderText) {
             location.reload();
         }
         document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
+
+         if (elementId === "opponent"){                                         //display last result
+            document.getElementById("results-text").innerHTML = attack.result;
+        }
     });
+
 }
 
 function redrawGrid() {
@@ -73,6 +81,7 @@ function redrawGrid() {
     game.playersBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
         document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
     }));
+
     markHits(game.opponentsBoard, "opponent", "You won the game");
     markHits(game.playersBoard, "player", "You lost the game");
 }
