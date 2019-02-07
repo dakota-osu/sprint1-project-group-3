@@ -55,10 +55,8 @@ td:hover {
     margin-left: auto;
     margin-right: auto;
     width: 75%;
-
     background-color: blue;
     border-radius: 50px;
-
     height: 520px;
 
 
@@ -120,4 +118,40 @@ td:hover {
 .sunken-ships-container li {
     list-style-type: none; 
     margin-bottom: 10px;
+
+}
+
+.error-modal-container {
+    visibility: hidden;
+    text-align: center;
+    position: fixed;
+    z-index: 9999;
+    width: 200px;
+    height: 150px;
+    top: 0;
+    bottom: 0;
+    left: 40%;
+    right: 0;
+    padding-top: 100px;
+}
+
+.error-modal {
+    background-color: white;
+    display: inline-block;
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.error-modal-header {
+    text-align: center;
+}
+
+.error-modal-body {
+    text-align: center;
+}
+
+.error-ok {
+    width: 100%;
+
 }

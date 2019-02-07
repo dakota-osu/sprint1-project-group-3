@@ -1,9 +1,23 @@
 
-var isSetup = true;
+var isSetup = false;
 var placedShips = 0;
 var game;
+
 var shipType = [];
+
 var vertical;
+
+document.getElementById("errorButton").addEventListener("click", showError);
+document.getElementById("error-ok").addEventListener("click", closeError);
+
+function showError(errorText) {
+    document.getElementById("errorText").innerHTML = errorText;
+    document.getElementById("error").style.visibility = "visible";
+}
+
+function closeError() {
+    document.getElementById("error").style.visibility = "hidden";
+}
 
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
@@ -83,16 +97,27 @@ function cellClick() {
             redrawGrid();
             updateShipList();
             placedShips++;
+            isSetup = false;
+            shipType = "BADSHIP";
             if (placedShips == 3) {
                 isSetup = false;
                 registerCellListener((e) => {});
             }
         });
     } else {
-        sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
-            game = data;
-            redrawGrid();
-        })
+        if (placedShips != 3) {
+            if (shipType == "BADSHIP") {
+                showError("No ship selected");
+            } else {
+                showError("Already placed that ship");
+            }
+        }
+        if (placedShips == 3) {
+            sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
+                game = data;
+                redrawGrid();
+            })
+        }
     }
 }
 
@@ -110,7 +135,7 @@ function sendXhr(method, url, data, handler) {
     var req = new XMLHttpRequest();
     req.addEventListener("load", function(event) {
         if (req.status != 200) {
-            alert("Cannot complete the action");
+            showError("Cannot target that spot");
             return;
         }
         handler(JSON.parse(req.responseText));
@@ -151,6 +176,7 @@ function initGame() {
     makeGrid(document.getElementById("opponent"), false);
     makeGrid(document.getElementById("player"), true);
 
+
     shipType = ["BATTLESHIP", "DESTROYER", "MINESWEEPER"];
     registerCellListener(place(4));
 
@@ -166,6 +192,7 @@ function initGame() {
     //     shipType = "BATTLESHIP";
     //    registerCellListener(place(4));
     // });
+
 
     sendXhr("GET", "/game", {}, function(data) {
         game = data;
