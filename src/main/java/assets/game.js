@@ -1,5 +1,5 @@
 
-var isSetup = false;
+var isSetup = true;
 var placedShips = 0;
 var game;
 
@@ -97,27 +97,20 @@ function cellClick() {
             redrawGrid();
             updateShipList();
             placedShips++;
-            isSetup = false;
-            shipType = "BADSHIP";
+//            isSetup = false;
+//            shipType = "BADSHIP";
             if (placedShips == 3) {
                 isSetup = false;
                 registerCellListener((e) => {});
             }
         });
     } else {
-        if (placedShips != 3) {
-            if (shipType == "BADSHIP") {
-                showError("No ship selected");
-            } else {
-                showError("Already placed that ship");
-            }
-        }
-        if (placedShips == 3) {
+
             sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
                 game = data;
                 redrawGrid();
             })
-        }
+
     }
 }
 
