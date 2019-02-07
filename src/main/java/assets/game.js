@@ -2,13 +2,18 @@
 var isSetup = true;
 var placedShips = 0;
 var game;
-
+var errors = 0;
 var shipType = [];
 
 var vertical;
 
-document.getElementById("errorButton").addEventListener("click", showError);
+document.getElementById("errorButton").addEventListener("click", errorButton);
 document.getElementById("error-ok").addEventListener("click", closeError);
+
+function errorButton() {
+    errors++;
+    showError("You've pressed me " + errors + " times. Keep it up!");
+}
 
 function showError(errorText) {
     document.getElementById("errorText").innerHTML = errorText;
@@ -128,8 +133,13 @@ function sendXhr(method, url, data, handler) {
     var req = new XMLHttpRequest();
     req.addEventListener("load", function(event) {
         if (req.status != 200) {
-            showError("Cannot target that spot");
-            return;
+            if (placedShips == 3) {
+                showError("Cannot target that spot");
+                return;
+            } else {
+                showError("Out of bounds");
+                return;
+            }
         }
         handler(JSON.parse(req.responseText));
     });
