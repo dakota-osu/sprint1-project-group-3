@@ -25,6 +25,10 @@ function markHits(board, elementId, surrenderText) {
         else if (attack.result === "HIT")
             className = "hit";
         else if (attack.result === "SUNK") {
+            console.log(attack.ship.shipType);
+
+           document.getElementById(elementId + "-" + attack.ship.shipType.toLowerCase()).classList.add("crossed-out");
+
             className = "sink";
             attack.ship.occupiedSquares.forEach((square) => {                                                                                           //if ship sunk, grab all occupied squares of ship
                 document.getElementById(elementId).rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);  //set all ship elements to sink class name
