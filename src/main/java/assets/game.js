@@ -64,6 +64,8 @@ function markHits(board, elementId, surrenderText) {
 
          if (elementId === "opponent"){                                         //display last result
             document.getElementById("results-text").innerHTML = attack.result;
+            document.getElementById("results-text").classList = className;      //edit this later
+
         }
     });
 
