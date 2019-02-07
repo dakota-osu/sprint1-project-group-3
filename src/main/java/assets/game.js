@@ -57,8 +57,9 @@ function markHits(board, elementId, surrenderText) {
         }
         document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
 
-         //document.getElementById("results-text").innerHTML = attack.result;
-
+         if (elementId === "opponent"){                                         //display last result
+            document.getElementById("results-text").innerHTML = attack.result;
+        }
     });
 
 }
@@ -75,11 +76,6 @@ function redrawGrid() {
     game.playersBoard.ships.forEach((ship) => ship.occupiedSquares.forEach((square) => {
         document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
     }));
-
-    //document.getElementById("results-text").innerHTML = game.playersBoard.attacks.length
-    var attackarraylength = game.playersBoard.attacks.length;
-    var currentattack = game.playersBoard.attacks[attackarraylength-1];
-    document.getElementById("results-text").innerHTML = attackarraylength;
 
     markHits(game.opponentsBoard, "opponent", "You won the game");
     markHits(game.playersBoard, "player", "You lost the game");
