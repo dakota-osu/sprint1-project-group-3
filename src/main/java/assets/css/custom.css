@@ -130,8 +130,6 @@ td:hover {
 
 .results-display-container{
     display: block;
-    margin-left: 50px;
-    margin-right: 50px;
     width: 75px;
 }
 
@@ -187,27 +185,26 @@ td:hover {
 
 }
 
-.error-maker{
-    align: center;
-}
+#is_vertical {
 
-.button {
-  background-color: #0336FF;
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  border-radius:15px;
-}
+    margin-left: auto;
+    margin-right: auto;
 
-.button:hover{
-    background-color: #FF0266;
-    border: 2px solid #0336FF;
+    border: none;
+    color: lightblue;
+
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 4px 2px;
+    margin-top: 15px;
+    cursor: pointer;
+
+    
+    background-color: blue;
+    color: black;
+    border: 2px solid lightblue;
+
 }

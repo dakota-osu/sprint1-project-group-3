@@ -1,5 +1,5 @@
 <#import "../layout/defaultLayout.ftl.html" as layout> 
-<@layout.myLayout "Home page">    
+<@layout.myLayout "Battleship">    
 
 
 <h1 class = "banner primary-color">The Battleship game</h1>
@@ -13,8 +13,20 @@
         </div>
         <div class="results-display-container">
             <div class="results-display">
-                <p id = "results-text">BEGIN BATTLE!</p>
+                <p id="results-text">PLACE YOUR SHIPS</p>
             </div>
+
+            
+            <button id="is_vertical">
+                ROTATE
+            </button>
+                
+            <!--
+            <ul>
+                <li><input type="checkbox" id="is_vertical">ROTATE</input></li>
+            </ul>
+            -->
+                
         </div>
         <div class="board-container">
             <p>COMPUTER</p>
@@ -57,11 +69,6 @@
     </div>
 </div>
 
-<button id="errorButton" class="error-maker button">MAKE AN ERROR</button>
-
-<ul>
-    <li><input type="checkbox" id="is_vertical">Vertical</input></li>
-</ul>
 
 <script type="text/javascript" src="/assets/game.js"></script>
 <script>
