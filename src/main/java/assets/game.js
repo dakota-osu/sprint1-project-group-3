@@ -76,7 +76,10 @@ function redrawGrid() {
         document.getElementById("player").rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add("occupied");
     }));
 
-    document.getElementById("results-text").innerHTML = game.playersBoard.attacks.length
+    //document.getElementById("results-text").innerHTML = game.playersBoard.attacks.length
+    var attackarraylength = game.playersBoard.attacks.length;
+    var currentattack = game.playersBoard.attacks[attackarraylength-1];
+    document.getElementById("results-text").innerHTML = attackarraylength;
 
     markHits(game.opponentsBoard, "opponent", "You won the game");
     markHits(game.playersBoard, "player", "You lost the game");
