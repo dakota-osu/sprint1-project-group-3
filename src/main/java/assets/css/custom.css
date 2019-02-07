@@ -154,3 +154,18 @@ td:hover {
     width: 100%;
 
 }
+
+.vswitch-container {
+    text-align: center;
+
+    background-color: white;
+}
+
+.is_vertical {
+    background-color: white;
+    display: inline-block;
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 250px;
+}
