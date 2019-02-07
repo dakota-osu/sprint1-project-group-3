@@ -1,12 +1,28 @@
 /* Add additional stylesheets below
 -------------------------------------------------- */
 
-.banner{
-    text-align: center;
+body {
+    margin: 0px;
 }
 
-.background{
-    background-color: #FF0266;
+.banner {
+    text-align: center;
+    font-size: 1.75em;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 60px;
+    background-color: blue;
+
+}
+
+.banner span {
+    margin-top: 30px;
+    color: black;
+}
+
+.background {
+    background-color: white
 }
 
 .battleGrid {
@@ -35,15 +51,15 @@ td:hover {
 }
 
 .hit {
-    background-color: #FFDE03;
+    background-color: yellow;
 }
 
 .sink {
-    background-color: #FF0266;
+    background-color: red;
 }
 
 .miss {
-    background-color: #0336FF;
+    background-color: gray;
 }
 
 .hidden {
@@ -51,11 +67,11 @@ td:hover {
 }
 
 .primary-color {
-    color: #FFDE03;
+    color: blue;
 }
 
 .secondary-color{
-    color: #FF0266;
+    color: white;
 }
 
 #game-modal {
@@ -146,10 +162,6 @@ td:hover {
 }
 
 
-#results-text {
-
-}
-
 .error-modal-container {
     visibility: hidden;
     text-align: center;
@@ -192,6 +204,8 @@ td:hover {
 
     border: none;
     color: lightblue;
+
+    border-radius: 50px;
 
     margin-top: 15px;
     text-align: center;
