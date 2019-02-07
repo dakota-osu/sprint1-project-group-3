@@ -2,8 +2,22 @@
 var isSetup = true;
 var placedShips = 0;
 var game;
-var shipType;
+
+var shipType = [];
+
 var vertical;
+
+document.getElementById("errorButton").addEventListener("click", showError);
+document.getElementById("error-ok").addEventListener("click", closeError);
+
+function showError(errorText) {
+    document.getElementById("errorText").innerHTML = errorText;
+    document.getElementById("error").style.visibility = "visible";
+}
+
+function closeError() {
+    document.getElementById("error").style.visibility = "hidden";
+}
 
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
@@ -25,6 +39,10 @@ function markHits(board, elementId, surrenderText) {
         else if (attack.result === "HIT")
             className = "hit";
         else if (attack.result === "SUNK") {
+            console.log(attack.ship.shipType);
+
+           document.getElementById(elementId + "-" + attack.ship.shipType.toLowerCase()).classList.add("crossed-out");
+
             className = "sink";
             attack.ship.occupiedSquares.forEach((square) => {                                                                                           //if ship sunk, grab all occupied squares of ship
                 document.getElementById(elementId).rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);  //set all ship elements to sink class name
@@ -73,20 +91,36 @@ function cellClick() {
     let row = this.parentNode.rowIndex + 1;
     let col = String.fromCharCode(this.cellIndex + 65);
     if (isSetup) {
-        sendXhr("POST", "/place", {game: game, shipType: shipType, x: row, y: col, isVertical: vertical}, function(data) {
+        // vertical = document.getElementById("is_vertical").checked;
+        sendXhr("POST", "/place", {game: game, shipType: shipType[0], x: row, y: col, isVertical: vertical}, function(data) {
             game = data;
             redrawGrid();
+            updateShipList();
             placedShips++;
+//            isSetup = false;
+//            shipType = "BADSHIP";
             if (placedShips == 3) {
                 isSetup = false;
                 registerCellListener((e) => {});
             }
         });
     } else {
-        sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
-            game = data;
-            redrawGrid();
-        })
+
+            sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
+                game = data;
+                redrawGrid();
+            })
+
+    }
+}
+
+function updateShipList() {
+    shipType.shift();
+    if(shipType.length === 2) {
+        registerCellListener(place(3))
+        console.log("asdf");
+    } else if(shipType.length === 1) {
+        registerCellListener(place(2))
     }
 }
 
@@ -94,7 +128,7 @@ function sendXhr(method, url, data, handler) {
     var req = new XMLHttpRequest();
     req.addEventListener("load", function(event) {
         if (req.status != 200) {
-            alert("Cannot complete the action");
+            showError("Cannot target that spot");
             return;
         }
         handler(JSON.parse(req.responseText));
@@ -134,18 +168,25 @@ function place(size) {
 function initGame() {
     makeGrid(document.getElementById("opponent"), false);
     makeGrid(document.getElementById("player"), true);
-    document.getElementById("place_minesweeper").addEventListener("click", function(e) {
-        shipType = "MINESWEEPER";
-       registerCellListener(place(2));
-    });
-    document.getElementById("place_destroyer").addEventListener("click", function(e) {
-        shipType = "DESTROYER";
-       registerCellListener(place(3));
-    });
-    document.getElementById("place_battleship").addEventListener("click", function(e) {
-        shipType = "BATTLESHIP";
-       registerCellListener(place(4));
-    });
+
+
+    shipType = ["BATTLESHIP", "DESTROYER", "MINESWEEPER"];
+    registerCellListener(place(4));
+
+    // document.getElementById("place_minesweeper").addEventListener("click", function(e) {
+    //     shipType = "MINESWEEPER";
+    //    registerCellListener(place(2));
+    // });
+    // document.getElementById("place_destroyer").addEventListener("click", function(e) {
+    //     shipType = "DESTROYER";
+    //    registerCellListener(place(3));
+    // });
+    // document.getElementById("place_battleship").addEventListener("click", function(e) {
+    //     shipType = "BATTLESHIP";
+    //    registerCellListener(place(4));
+    // });
+
+
     sendXhr("GET", "/game", {}, function(data) {
         game = data;
     });
