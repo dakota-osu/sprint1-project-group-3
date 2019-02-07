@@ -39,8 +39,8 @@ function markHits(board, elementId, surrenderText) {
                 className = "hit";
         } else if (attack.result === "SUNK") {
 
-           document.getElementById(elementId + "-" + attack.ship.shipType.toLowerCase()).classList.add("crossed-out");                                  //if sunken, cross out ship name
-
+            document.getElementById(elementId + "-" + attack.ship.shipType.toLowerCase()).classList.add("crossed-out");                                  //if sunken, cross out ship name
+            document.getElementById(elementId + "-" + attack.ship.shipType.toLowerCase()).classList.add("secondary-color");                              //also changes color of said ship name
             className = "sink";
             attack.ship.occupiedSquares.forEach((square) => {                                                                                           //if ship sunk, grab all occupied squares of ship
                 document.getElementById(elementId).rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);  //set all ship elements to sink class name
@@ -54,6 +54,8 @@ function markHits(board, elementId, surrenderText) {
 
          if (elementId === "opponent"){                                         
             document.getElementById("results-text").innerHTML = attack.result;
+            document.getElementById("results-text").classList = className;      //edit this later
+
         }
     });
 

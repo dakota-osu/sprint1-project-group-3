@@ -1,6 +1,14 @@
 /* Add additional stylesheets below
 -------------------------------------------------- */
 
+.banner{
+    text-align: center;
+}
+
+.background{
+    background-color: #FF0266;
+}
+
 .battleGrid {
     border-spacing: 0px;
 }
@@ -43,11 +51,11 @@ td:hover {
 }
 
 .primary-color {
-    background-color: white;
+    color: #FFDE03;
 }
 
 .secondary-color{
-    background-color: black;
+    color: #FF0266;
 }
 
 #game-modal {
@@ -151,9 +159,9 @@ td:hover {
     height: 150px;
     top: 0;
     bottom: 0;
-    left: 45%;
+    left: 40%;
     right: 0;
-    padding-top: 150px;
+    padding-top: 100px;
 }
 
 .error-modal {
@@ -198,4 +206,5 @@ td:hover {
     background-color: blue;
     color: black;
     border: 2px solid lightblue;
+
 }
