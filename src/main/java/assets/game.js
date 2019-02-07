@@ -2,18 +2,12 @@
 var isSetup = true;
 var placedShips = 0;
 var game;
-var errors = 0;
 var shipType = [];
 
 var vertical;
 
-document.getElementById("errorButton").addEventListener("click", errorButton);
-document.getElementById("error-ok").addEventListener("click", closeError);
 
-function errorButton() {
-    errors++;
-    showError("You've pressed me " + errors + " times. Keep it up!");
-}
+
 
 function showError(errorText) {
     document.getElementById("errorText").innerHTML = errorText;
@@ -24,7 +18,7 @@ function closeError() {
     document.getElementById("error").style.visibility = "hidden";
 }
 
-function makeGrid(table, isPlayer) {
+function makeGrid(table) {
     for (i=0; i<10; i++) {
         let row = document.createElement('tr');
         for (j=0; j<10; j++) {
@@ -109,6 +103,7 @@ function cellClick() {
             if (placedShips == 3) {
                 isSetup = false;
                 registerCellListener((e) => {});
+                document.getElementById("is_vertical").style.visibility = "hidden";
             }
         });
     } else {
@@ -154,7 +149,6 @@ function place(size) {
     return function() {
         let row = this.parentNode.rowIndex;
         let col = this.cellIndex;
-        vertical = document.getElementById("is_vertical").checked;
         let table = document.getElementById("player");
         for (let i=0; i<size; i++) {
             let cell;
@@ -177,9 +171,16 @@ function place(size) {
     }
 }
 
+function toggleVertical() {
+    vertical = !vertical;
+}
+
 function initGame() {
-    makeGrid(document.getElementById("opponent"), false);
-    makeGrid(document.getElementById("player"), true);
+    document.getElementById("error-ok").addEventListener("click", closeError);
+    document.getElementById("is_vertical").addEventListener("click", toggleVertical);
+
+    makeGrid(document.getElementById("opponent"));
+    makeGrid(document.getElementById("player"));
 
 
     shipType = ["BATTLESHIP", "DESTROYER", "MINESWEEPER"];
