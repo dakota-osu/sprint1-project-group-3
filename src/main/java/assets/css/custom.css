@@ -122,8 +122,6 @@ td:hover {
 
 .results-display-container{
     display: block;
-    margin-left: 50px;
-    margin-right: 50px;
     width: 75px;
 }
 
@@ -179,3 +177,25 @@ td:hover {
 
 }
 
+#is_vertical {
+
+    margin-left: auto;
+    margin-right: auto;
+
+    border: none;
+    color: lightblue;
+
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 4px 2px;
+    margin-top: 15px;
+    cursor: pointer;
+
+    
+    background-color: blue;
+    color: black;
+    border: 2px solid lightblue;
+}
