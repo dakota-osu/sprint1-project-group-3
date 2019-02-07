@@ -4,11 +4,40 @@
 
 <h1>The Battleship game</h1>
 
-<table id="opponent" class="battleGrid">
-</table>
+<div id="game-modal">
+    <div id="upper-game-modal">
+        <div class="board-container">
+            <p>PLAYER</p>
+            <table id="player" class="battleGrid board">
+            </table>
+        </div>
 
-<table id="player" class="battleGrid">
-</table>
+        <div class="board-container">
+            <p>COMPUTER</p>
+            <table id="opponent" class="battleGrid board">
+            </table>
+        </div>
+    </div>
+
+    <p id="sunken-ships-header">SUNKEN SHIPS</p>
+    <div id="lower-game-modal">
+        
+        <div id="player-sunken" class="sunken-ships-container">
+            <ul class="suken-ships">
+                <li id="opponent-battleship"> - BATTLESHIP - </li>
+                <li id="opponent-minesweeper"> - MINESWEEPER - </li>
+                <li id="opponent-destroyer"> - DESTROYER - </li>
+            </ul>
+        </div>
+        <div id="opponent-sunken" class="sunken-ships-container">
+                <ul class="suken-ships">
+                    <li id="player-battleship"> - BATTLESHIP - </li>
+                    <li id="player-minesweeper"> - MINESWEEPER - </li>
+                    <li id="player-destroyer"> - DESTROYER - </li>  
+                </ul> 
+        </div>
+    </div>
+</div>
 
 <div id="error" class="error-modal-container">
     <div id="myModal" class="error-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -27,9 +56,6 @@
 <button id="errorButton" class="error-maker">MAKE AN ERROR</button>
 
 <ul>
-    <li><button id="place_minesweeper">Place Minesweeper</button></li>
-    <li><button id="place_destroyer">Place Destroyer</button></li>
-    <li><button id="place_battleship">Place Battleship</button></li>
     <li><input type="checkbox" id="is_vertical">Vertical</input></li>
 </ul>
 

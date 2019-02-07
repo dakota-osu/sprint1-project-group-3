@@ -24,6 +24,9 @@ public class Board {
 		Ship toAdd = new Ship(ship);
 		toAdd.setOccupiedSquaresByOrientation(x, y, isVertical);	
 
+		if(toAdd.getShipType() == Ship.ShipType.INVALID) 
+			return false;
+
 		// check that each occupied square is valid
 		for(Square s : toAdd.getOccupiedSquares()) {
 			if(0 > s.getRow() || s.getRow() > 10)
@@ -82,6 +85,7 @@ public class Board {
 					s.takeDamage(x,y);
 					if(s.getHealth()==0){
 						attackResult.setResult(AtackStatus.SUNK);
+						attackResult.setShip(new Ship(s));
 					}
 					break;
 				}
