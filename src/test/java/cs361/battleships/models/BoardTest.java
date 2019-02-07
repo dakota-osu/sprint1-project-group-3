@@ -27,9 +27,6 @@ public class BoardTest {
 
         Board board4 = new Board();
         assertTrue(board4.placeShip(new Ship("MINESWEEPER"), 9, 'A', false));
-
-        Board board5 = new Board();
-        assertFalse(board5.placeShip(new Ship("asdsdfasdf"), 9, 'B', false));
     }
 
     @Test
