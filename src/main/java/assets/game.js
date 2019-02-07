@@ -54,7 +54,7 @@ function markHits(board, elementId, surrenderText) {
 
          if (elementId === "opponent"){                                         
             document.getElementById("results-text").innerHTML = attack.result;
-            document.getElementById("results-text").classList = className;      //edit this later
+            //document.getElementById("results-text").classList = className;      //edit this later
 
         }
     });
