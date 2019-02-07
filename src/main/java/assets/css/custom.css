@@ -120,6 +120,29 @@ td:hover {
 
 }
 
+.results-display-container{
+    display: block;
+    margin-left: 50px;
+    margin-right: 50px;
+    width: 75px;
+}
+
+.results-display {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+}
+
+.results-display p {
+    text-align: center;
+}
+
+
+#results-text {
+
+}
+
 .error-modal-container {
     visibility: hidden;
     text-align: center;
