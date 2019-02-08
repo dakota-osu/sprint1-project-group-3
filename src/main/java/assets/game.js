@@ -46,8 +46,11 @@ function markHits(board, elementId, surrenderText) {
                 document.getElementById(elementId).rows[square.row-1].cells[square.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);  //set all ship elements to sink class name
             });
         } else if (attack.result === "SURRENDER") {                                  
-            alert(surrenderText);
-            location.reload();
+            showError(surrenderText);
+            document.getElementById("error-ok").removeEventListener("click", closeError);
+            document.getElementById("error-ok").addEventListener("click", (e) => {
+                location.reload();
+            });
         }
 
         document.getElementById(elementId).rows[attack.location.row-1].cells[attack.location.column.charCodeAt(0) - 'A'.charCodeAt(0)].classList.add(className);
@@ -122,7 +125,6 @@ function updateShipList() {
     shipType.shift();
     if(shipType.length === 2) {
         registerCellListener(place(3))
-        console.log("asdf");
     } else if(shipType.length === 1) {
         registerCellListener(place(2))
     }

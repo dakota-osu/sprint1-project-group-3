@@ -2,7 +2,25 @@
 <@layout.myLayout "Battleship">    
 
 
-<h1 class = "banner primary-color">The Battleship game</h1>
+<div class="banner">
+    <span>BATTLESHIPS</span>
+ </div>
+
+
+
+<div id="error" class="error-modal-container">
+    <div id="myModal" class="error-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="error-modal-header">
+            <h3 id="myModalLabel">ALERT</h3>
+        </div>
+        <div class="error-modal-body">
+            <p id="errorText">You shouldn't be seeing this right now....</p>
+        </div>
+        <div class="error-modal-footer">
+            <button id="error-ok" class="error-ok" data-dismiss="modal" aria-hidden="true">OK</button>
+        </div>
+    </div>
+</div>
 
 <div id="game-modal">
     <div id="upper-game-modal">
@@ -21,11 +39,6 @@
                 ROTATE
             </button>
                 
-            <!--
-            <ul>
-                <li><input type="checkbox" id="is_vertical">ROTATE</input></li>
-            </ul>
-            -->
                 
         </div>
         <div class="board-container">
@@ -34,6 +47,9 @@
             </table>
         </div>
     </div>
+
+
+    
 
     <p id="sunken-ships-header">SUNKEN SHIPS</p>
     <div id="lower-game-modal">
@@ -55,19 +71,6 @@
     </div>
 </div>
 
-<div id="error" class="error-modal-container">
-    <div id="myModal" class="error-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="error-modal-header">
-            <h3 id="myModalLabel">ERROR</h3>
-        </div>
-        <div class="error-modal-body">
-            <p id="errorText">You shouldn't be seeing this right now....</p>
-        </div>
-        <div class="error-modal-footer">
-            <button id="error-ok" class="error-ok" data-dismiss="modal" aria-hidden="true">OK</button>
-        </div>
-    </div>
-</div>
 
 
 <script type="text/javascript" src="/assets/game.js"></script>
