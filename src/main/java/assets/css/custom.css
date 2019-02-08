@@ -75,6 +75,8 @@ td:hover {
 }
 
 #game-modal {
+    position: relative;
+    z-index: 1;
     margin-left: auto;
     margin-right: auto;
     width: 75%;
@@ -165,14 +167,12 @@ td:hover {
 .error-modal-container {
     visibility: hidden;
     text-align: center;
-    position: fixed;
-    z-index: 9999;
+    position: absolute;
+    z-index: 100;
     width: 200px;
     height: 150px;
-    top: 0;
-    bottom: 0;
-    left: 40%;
-    right: 0;
+    margin-left: 43.5%;
+
     padding-top: 100px;
 }
 
@@ -180,7 +180,8 @@ td:hover {
     background-color: white;
     display: inline-block;
     width: 100%;
-    border: 1px solid black;
+
+    border-radius: 25px;
     text-align: center;
 }
 
@@ -193,7 +194,15 @@ td:hover {
 }
 
 .error-ok {
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    width: 50%;
+
+    border: none;
+    border-radius: 25px;
+
+    border: 2px solid blue;
 
 }
 
@@ -219,6 +228,6 @@ td:hover {
     
     background-color: blue;
     color: black;
-    border: 2px solid lightblue;
+    border: 2px solid black;
 
 }
